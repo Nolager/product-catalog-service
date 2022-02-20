@@ -8,7 +8,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +24,7 @@ public class WeaponEntityDaoImpl implements WeaponEntityDao {
         try {
             new CsvMapper()
                     .readerWithTypedSchemaFor(WeaponEntity.class)
-                    // FIXME throws null pointer exception
-//                    .<WeaponEntity>readValues(csvFile.getInputStream())
-                    .<WeaponEntity>readValues(Paths.get("weapon-catalog.csv").toFile())
+                    .<WeaponEntity>readValues(csvFile.getInputStream())
                     .readAll(weapons);
 
         } catch (IOException e) {
